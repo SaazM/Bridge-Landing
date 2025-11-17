@@ -12,7 +12,7 @@ export default function BeyondResumes() {
   const visibleNodesRef = useRef(new Set());
   const sectionRef = useRef(null);
   const animationStartedRef = useRef(false);
-  const animationStepRef = useRef(0); // Changed: Renamed from internalAnimationStepRef to animationStepRef
+  const animationStepRef = useRef(0);
 
   const [analysisStep, setAnalysisStep] = useState(0);
   const [typingText, setTypingText] = useState("");
@@ -339,7 +339,6 @@ export default function BeyondResumes() {
 
         userData.baseScale += (userData.targetScale - userData.baseScale) * 0.1;
 
-        // Changed: Use animationStepRef.current instead of internalAnimationStepRef.current
         const currentStep = animationStepRef.current;
         const isConnectedLeft = analysisSteps[currentStep].connectedNodes.includes(i);
         const isConnectedRight = understandingSteps[currentStep].connectedNodes.includes(i);
@@ -388,7 +387,7 @@ export default function BeyondResumes() {
     const stepInterval = setInterval(() => {
       setAnalysisStep((prevStep) => {
         const nextStep = (prevStep + 1) % analysisSteps.length;
-        animationStepRef.current = nextStep; // Changed: Use animationStepRef.current
+        animationStepRef.current = nextStep;
 
         if (nextStep === 0) {
           hideAllNodes();
@@ -410,9 +409,8 @@ export default function BeyondResumes() {
       clearInterval(stepInterval);
       window.removeEventListener("resize", handleResize);
       renderer.dispose();
-      // Ensure all objects are removed from the scene when component unmounts or effect re-runs
       scene.children.forEach((child) => {
-        if (child instanceof THREE.Group) {// Remove graphGroup and its children
+        if (child instanceof THREE.Group) {
           child.children.forEach((grandchild) => {
             if (grandchild.geometry) grandchild.geometry.dispose();
             if (grandchild.material) grandchild.material.dispose();
@@ -444,12 +442,13 @@ export default function BeyondResumes() {
             <span className="text-[#0B1121]">Beyond</span>{" "}
             <span className="text-[#1E3A8A]">Resumes</span>
           </h2>
-          <p className="text-base md:text-xl text-[#6B7280] max-w-2xl mx-auto leading-relaxed font-normal">Resumes are static. You're not. Bridge reads your code, understands projects, and turns them into a dynamic map of your skills and growth.
-
+          <p className="text-base md:text-xl text-[#6B7280] max-w-2xl mx-auto leading-relaxed font-normal">
+            Resumes are static. You're not. Bridge reads your code, understands projects, and turns them into a dynamic map of your skills and growth.
           </p>
         </motion.div>
 
-        <div className="relative w-full h-[600px] md:h-[700px] lg:h-[800px] rounded-3xl overflow-hidden bg-gradient-to-br from-[#0B1121] via-[#1a1f35] to-[#1E3A8A] border-2 border-gray-300 shadow-2xl">
+        {/* Desktop: 3D Animation with Absolute Positioned Cards */}
+        <div className="hidden md:block relative w-full h-[700px] lg:h-[800px] rounded-3xl overflow-hidden bg-gradient-to-br from-[#0B1121] via-[#1a1f35] to-[#1E3A8A] border-2 border-gray-300 shadow-2xl">
           <div className="absolute inset-0 opacity-[0.015]" style={{
             backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' /%3E%3C/svg%3E")`
           }} />
@@ -461,14 +460,14 @@ export default function BeyondResumes() {
             initial={{ opacity: 0, x: -60 }}
             animate={{ opacity: isVisible ? 1 : 0, x: isVisible ? 0 : -60 }}
             transition={{ duration: 1.2, delay: 0.2, ease: "easeOut" }}
-            className="absolute left-4 md:left-8 top-8 md:top-12 z-20 w-[280px] md:w-[320px]">
+            className="absolute left-8 top-12 z-20 w-[320px]">
 
-            <div className="bg-[#0f1419]/70 backdrop-blur-2xl border border-white/10 rounded-2xl p-4 md:p-5 shadow-2xl">
+            <div className="bg-[#0f1419]/70 backdrop-blur-2xl border border-white/10 rounded-2xl p-5 shadow-2xl">
               <div className="flex items-center gap-2.5 mb-4">
-                <div className="w-8 h-8 md:w-9 md:h-9 rounded-lg bg-[#3B82F6]/15 flex items-center justify-center border border-[#3B82F6]/20">
-                  <Code className="w-4 h-4 md:w-4.5 md:h-4.5 text-[#3B82F6]" />
+                <div className="w-9 h-9 rounded-lg bg-[#3B82F6]/15 flex items-center justify-center border border-[#3B82F6]/20">
+                  <Code className="w-4.5 h-4.5 text-[#3B82F6]" />
                 </div>
-                <h3 className="text-white/90 font-medium text-xs md:text-sm tracking-tight">AI Code Analysis</h3>
+                <h3 className="text-white/90 font-medium text-sm tracking-tight">AI Code Analysis</h3>
               </div>
 
               <AnimatePresence mode="wait">
@@ -478,7 +477,7 @@ export default function BeyondResumes() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.3 }}
-                  className="bg-[#0B1121]/70 rounded-xl p-3 mb-4 font-mono text-[10px] md:text-[11px] border border-white/5 leading-relaxed">
+                  className="bg-[#0B1121]/70 rounded-xl p-3 mb-4 font-mono text-[11px] border border-white/5 leading-relaxed">
 
                   {analysisSteps[analysisStep].code.map((line, idx) => {
                     const isComment = line.trim().startsWith('//');
@@ -494,10 +493,8 @@ export default function BeyondResumes() {
                         isString ? "text-emerald-400" :
                         "text-gray-300"
                         }>
-
                         {line}
                       </div>);
-
                   })}
                 </motion.div>
               </AnimatePresence>
@@ -511,7 +508,7 @@ export default function BeyondResumes() {
                   transition={{ duration: 0.3 }}
                   className="space-y-3">
 
-                  <div className="text-gray-200 text-[11px] md:text-[12px] font-normal min-h-[18px]">
+                  <div className="text-gray-200 text-[12px] font-normal min-h-[18px]">
                     {typingText}
                     {isVisible && <span className="inline-block w-0.5 h-3 bg-[#FFFF00] ml-0.5 animate-pulse" />}
                   </div>
@@ -524,7 +521,6 @@ export default function BeyondResumes() {
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ delay: i * 0.12, duration: 0.3 }}
                       className="px-2 py-0.5 bg-[#3B82F6]/15 text-[#3B82F6] text-[10px] rounded-md border border-[#3B82F6]/25 font-medium">
-
                           {skill}
                         </motion.div>
                     )}
@@ -543,14 +539,14 @@ export default function BeyondResumes() {
             initial={{ opacity: 0, x: 60 }}
             animate={{ opacity: isVisible ? 1 : 0, x: isVisible ? 0 : 60 }}
             transition={{ duration: 1.2, delay: 0.4, ease: "easeOut" }}
-            className="absolute right-4 md:right-8 bottom-8 md:bottom-12 z-20 w-[280px] md:w-[320px]">
+            className="absolute right-8 bottom-12 z-20 w-[320px]">
 
-            <div className="bg-[#0f1419]/70 backdrop-blur-2xl border border-white/10 rounded-2xl p-4 md:p-5 shadow-2xl">
+            <div className="bg-[#0f1419]/70 backdrop-blur-2xl border border-white/10 rounded-2xl p-5 shadow-2xl">
               <div className="flex items-center gap-2.5 mb-4">
-                <div className="w-8 h-8 md:w-9 md:h-9 rounded-lg bg-[#FFFF00]/15 flex items-center justify-center border border-[#FFFF00]/20">
-                  <Brain className="w-4 h-4 md:w-4.5 md:h-4.5 text-[#FFFF00]" />
+                <div className="w-9 h-9 rounded-lg bg-[#FFFF00]/15 flex items-center justify-center border border-[#FFFF00]/20">
+                  <Brain className="w-4.5 h-4.5 text-[#FFFF00]" />
                 </div>
-                <h3 className="text-white/90 font-medium text-xs md:text-sm tracking-tight">AI Soft Skill Analysis</h3>
+                <h3 className="text-white/90 font-medium text-sm tracking-tight">AI Soft Skill Analysis</h3>
               </div>
 
               <AnimatePresence mode="wait">
@@ -562,7 +558,7 @@ export default function BeyondResumes() {
                   transition={{ duration: 0.3 }}
                   className="space-y-3">
 
-                  <div className="text-gray-200 text-[11px] md:text-[12px] font-normal min-h-[18px]">
+                  <div className="text-gray-200 text-[12px] font-normal min-h-[18px]">
                     {rightTypingText}
                     {isVisible && <span className="inline-block w-0.5 h-3 bg-[#FFFF00] ml-0.5 animate-pulse" />}
                   </div>
@@ -575,7 +571,136 @@ export default function BeyondResumes() {
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ delay: i * 0.12, duration: 0.3 }}
                       className="px-2 py-0.5 bg-[#FFFF00]/15 text-[#FFFF00] text-[10px] rounded-md border border-[#FFFF00]/25 font-medium">
+                        {metric}
+                      </motion.div>
+                    )}
+                  </div>
+                </motion.div>
+              </AnimatePresence>
 
+              <div className="pt-3 mt-3 border-t border-white/10">
+                <div className="text-gray-500 text-[10px] font-medium uppercase tracking-wide mb-1.5">Measured from</div>
+                <p className="text-gray-400 text-[10px] leading-relaxed">
+                  Project descriptions • Case studies • Documentation • Coursework • Portfolio content • Team projects • Writing samples
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Mobile: Stacked Cards Without Animation */}
+        <div className="md:hidden flex flex-col gap-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 20 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="w-full">
+
+            <div className="bg-gradient-to-br from-[#0B1121] via-[#1a1f35] to-[#1E3A8A] border border-white/10 rounded-2xl p-5 shadow-xl">
+              <div className="flex items-center gap-2.5 mb-4">
+                <div className="w-9 h-9 rounded-lg bg-[#3B82F6]/15 flex items-center justify-center border border-[#3B82F6]/20">
+                  <Code className="w-4.5 h-4.5 text-[#3B82F6]" />
+                </div>
+                <h3 className="text-white/90 font-medium text-sm tracking-tight">AI Code Analysis</h3>
+              </div>
+
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={analysisStep}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.3 }}
+                  className="bg-[#0B1121]/70 rounded-xl p-3 mb-4 font-mono text-[10px] border border-white/5 leading-relaxed">
+
+                  {analysisSteps[analysisStep].code.map((line, idx) => {
+                    const isComment = line.trim().startsWith('//');
+                    const isKeyword = line.includes('const ') || line.includes('async ') || line.includes('await ') || line.includes('export ') || line.includes('return ') || line.includes('useEffect') || line.includes('useState');
+                    const isString = line.includes("'") || line.includes('"');
+
+                    return (
+                      <div
+                        key={idx}
+                        className={
+                        isComment ? "text-gray-500" :
+                        isKeyword ? "text-blue-400" :
+                        isString ? "text-emerald-400" :
+                        "text-gray-300"
+                        }>
+                        {line}
+                      </div>);
+                  })}
+                </motion.div>
+              </AnimatePresence>
+
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={analysisStep}
+                  initial={{ opacity: 0, y: 5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -5 }}
+                  transition={{ duration: 0.3 }}
+                  className="space-y-3">
+
+                  <div className="text-gray-200 text-[11px] font-normal min-h-[18px]">
+                    {typingText}
+                    {isVisible && <span className="inline-block w-0.5 h-3 bg-[#FFFF00] ml-0.5 animate-pulse" />}
+                  </div>
+                  {analysisSteps[analysisStep].skills.length > 0 &&
+                  <div className="flex flex-wrap gap-1.5 mt-2">
+                      {analysisSteps[analysisStep].skills.map((skill, i) =>
+                    <motion.div
+                      key={skill}
+                      initial={{ opacity: 0, scale: 0.85 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: i * 0.12, duration: 0.3 }}
+                      className="px-2 py-0.5 bg-[#3B82F6]/15 text-[#3B82F6] text-[9px] rounded-md border border-[#3B82F6]/25 font-medium">
+                          {skill}
+                        </motion.div>
+                    )}
+                    </div>
+                  }
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 20 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="w-full">
+
+            <div className="bg-gradient-to-br from-[#0B1121] via-[#1a1f35] to-[#1E3A8A] border border-white/10 rounded-2xl p-5 shadow-xl">
+              <div className="flex items-center gap-2.5 mb-4">
+                <div className="w-9 h-9 rounded-lg bg-[#FFFF00]/15 flex items-center justify-center border border-[#FFFF00]/20">
+                  <Brain className="w-4.5 h-4.5 text-[#FFFF00]" />
+                </div>
+                <h3 className="text-white/90 font-medium text-sm tracking-tight">AI Soft Skill Analysis</h3>
+              </div>
+
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={analysisStep}
+                  initial={{ opacity: 0, y: 5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -5 }}
+                  transition={{ duration: 0.3 }}
+                  className="space-y-3">
+
+                  <div className="text-gray-200 text-[11px] font-normal min-h-[18px]">
+                    {rightTypingText}
+                    {isVisible && <span className="inline-block w-0.5 h-3 bg-[#FFFF00] ml-0.5 animate-pulse" />}
+                  </div>
+                  
+                  <div className="flex flex-wrap gap-1.5 mt-2">
+                    {understandingSteps[analysisStep].metrics.map((metric, i) =>
+                    <motion.div
+                      key={metric}
+                      initial={{ opacity: 0, scale: 0.85 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: i * 0.12, duration: 0.3 }}
+                      className="px-2 py-0.5 bg-[#FFFF00]/15 text-[#FFFF00] text-[9px] rounded-md border border-[#FFFF00]/25 font-medium">
                         {metric}
                       </motion.div>
                     )}
