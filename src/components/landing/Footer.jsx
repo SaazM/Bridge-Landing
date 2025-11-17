@@ -1,5 +1,5 @@
 import React from "react";
-import { Twitter, Linkedin } from "lucide-react";
+import { Linkedin } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -20,10 +20,7 @@ export default function Footer() {
               AI-powered internship matching for college students. Skip the applications, focus on what matters.
             </p>
             <div className="flex gap-4">
-              <a href="#" className="w-10 h-10 bg-gray-200 hover:bg-gray-300 rounded-lg flex items-center justify-center transition-colors">
-                <Twitter className="w-5 h-5" />
-              </a>
-              <a href="#" className="w-10 h-10 bg-gray-200 hover:bg-gray-300 rounded-lg flex items-center justify-center transition-colors">
+              <a href="https://www.linkedin.com/company/bridgeai-recruiting/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-gray-200 hover:bg-gray-300 rounded-lg flex items-center justify-center transition-colors">
                 <Linkedin className="w-5 h-5" />
               </a>
             </div>
