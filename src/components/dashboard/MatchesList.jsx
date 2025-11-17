@@ -11,7 +11,7 @@ export default function MatchesList({ matches }) {
         transition={{ duration: 0.6, delay: 0.2 }}
         className="text-2xl font-semibold text-[#0B1121]"
       >
-        Your Matches
+        To Do
       </motion.h2>
       
       {matches.map((match, i) => (

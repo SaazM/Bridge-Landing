@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import Header from "../components/navigation/Header";
 import EmployerHero from "../components/employers/Hero";
-import EmployerHowItWorks from "../components/employers/HowItWorks";
+import TraditionalVsBridge from "../components/employers/TraditionalVsBridge";
+import BeyondResumesEmployer from "../components/employers/BeyondResumes";
 import WhyFoundersLove from "../components/employers/WhyFoundersLove";
 import DashboardShowcase from "../components/employers/DashboardShowcase";
 import EmployerTestimonials from "../components/employers/Testimonials";
@@ -27,10 +28,9 @@ export default function Employers() {
     <div className="min-h-screen bg-white overflow-hidden">
       <Header currentPage="Employers" />
       <EmployerHero />
-      <EmployerHowItWorks />
-      <WhyFoundersLove />
+      <TraditionalVsBridge />
+      <BeyondResumesEmployer />
       <DashboardShowcase />
-      <EmployerTestimonials />
       <FinalCTA />
       <Footer />
     </div>

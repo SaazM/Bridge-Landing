@@ -1,6 +1,5 @@
-
 import React from "react";
-import { Sparkles, Twitter, Linkedin, Instagram } from "lucide-react";
+import { Twitter, Linkedin } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -10,9 +9,11 @@ export default function Footer() {
           {/* Brand */}
           <div className="md:col-span-2">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: '#FFFF00' }}>
-                <Sparkles className="w-6 h-6 text-[#1E3A8A]" />
-              </div>
+              <img
+                src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6917685328c008689a17e188/53409a687_Untitled_Artwork.png"
+                alt="Bridge Logo"
+                className="w-10 h-10" />
+
               <span className="text-2xl font-semibold text-[#1E3A8A]">Bridge</span>
             </div>
             <p className="text-gray-600 leading-relaxed max-w-md mb-6 font-normal">
@@ -25,9 +26,6 @@ export default function Footer() {
               <a href="#" className="w-10 h-10 bg-gray-200 hover:bg-gray-300 rounded-lg flex items-center justify-center transition-colors">
                 <Linkedin className="w-5 h-5" />
               </a>
-              <a href="#" className="w-10 h-10 bg-gray-200 hover:bg-gray-300 rounded-lg flex items-center justify-center transition-colors">
-                <Instagram className="w-5 h-5" />
-              </a>
             </div>
           </div>
 
@@ -35,20 +33,15 @@ export default function Footer() {
           <div>
             <h4 className="text-[#1E3A8A] font-semibold mb-4">Product</h4>
             <ul className="space-y-3 font-normal">
-              <li><a href="#" className="hover:text-[#1E3A8A] transition-colors">How it works</a></li>
-              <li><a href="#" className="hover:text-[#1E3A8A] transition-colors">For Students</a></li>
-              <li><a href="#" className="hover:text-[#1E3A8A] transition-colors">For Startups</a></li>
-              <li><a href="#" className="hover:text-[#1E3A8A] transition-colors">Pricing</a></li>
+              <li><a href="/home" className="hover:text-[#1E3A8A] transition-colors">For Students</a></li>
+              <li><a href="/employers" className="hover:text-[#1E3A8A] transition-colors">For Employers</a></li>
             </ul>
           </div>
 
           <div>
             <h4 className="text-[#1E3A8A] font-semibold mb-4">Company</h4>
             <ul className="space-y-3 font-normal">
-              <li><a href="#" className="hover:text-[#1E3A8A] transition-colors">About</a></li>
-              <li><a href="#" className="hover:text-[#1E3A8A] transition-colors">Blog</a></li>
-              <li><a href="#" className="hover:text-[#1E3A8A] transition-colors">Careers</a></li>
-              <li><a href="#" className="hover:text-[#1E3A8A] transition-colors">Contact</a></li>
+              <li><a href="/contact" className="hover:text-[#1E3A8A] transition-colors">Contact</a></li>
             </ul>
           </div>
         </div>
@@ -57,13 +50,8 @@ export default function Footer() {
           <p className="text-sm font-normal">
             © 2025 Bridge. All rights reserved.
           </p>
-          <div className="flex gap-6 text-sm font-normal">
-            <a href="#" className="hover:text-[#1E3A8A] transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-[#1E3A8A] transition-colors">Terms of Service</a>
-            <a href="#" className="hover:text-[#1E3A8A] transition-colors">Cookie Policy</a>
-          </div>
         </div>
       </div>
-    </footer>
-  );
+    </footer>);
+
 }

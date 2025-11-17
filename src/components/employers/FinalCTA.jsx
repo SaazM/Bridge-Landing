@@ -1,24 +1,11 @@
-
-import React, { useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { ArrowRight } from "lucide-react";
+import { Calendar } from "lucide-react";
 
 export default function FinalCTA() {
-  const [email, setEmail] = useState("");
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log("Submitting email:", email);
-    
-    setIsSubmitted(true);
-    setEmail("");
-    
-    setTimeout(() => {
-      setIsSubmitted(false);
-    }, 3000);
+  const handleScheduleCall = () => {
+    window.open('https://calendly.com/smahadkar-ucsd/30min', '_blank');
   };
 
   return (
@@ -38,38 +25,22 @@ export default function FinalCTA() {
             </h2>
 
             <p className="text-xl text-[#6B7280] mb-10 max-w-2xl mx-auto leading-relaxed font-normal">
-              Join the beta and start receiving AI-matched candidates every week
+              Schedule a 15-minute call to see how Bridge can transform your hiring
             </p>
 
-            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto">
-              <Input
-                type="email"
-                placeholder="Enter your work email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="h-14 px-6 text-lg font-normal rounded-2xl border-2 border-gray-300 bg-white text-[#0B1121] placeholder:text-gray-400 focus:border-[#FFFF00] transition-all"
-                required
-              />
-              <Button
-                type="submit"
-                className="h-14 px-8 text-lg font-medium rounded-2xl text-[#1E3A8A] shadow-lg hover:shadow-xl transition-all whitespace-nowrap"
-                style={{ backgroundColor: '#FFFF00' }}
-                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#FFFF00'}
-                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#FFFF00'}
-                disabled={isSubmitted}
-              >
-                {isSubmitted ? (
-                  "Joined! 🎉"
-                ) : (
-                  <>
-                    Join Employer Beta <ArrowRight className="ml-2 w-5 h-5" />
-                  </>
-                )}
-              </Button>
-            </form>
+            <Button
+              onClick={handleScheduleCall}
+              className="h-14 px-10 text-lg font-medium rounded-2xl text-[#1E3A8A] shadow-lg hover:shadow-xl transition-all"
+              style={{ backgroundColor: '#FFFF00' }}
+              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#E5E500'}
+              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#FFFF00'}
+            >
+              <Calendar className="mr-2 w-5 h-5" />
+              Schedule a Call
+            </Button>
 
             <p className="text-[#6B7280] text-sm mt-6 font-normal">
-              No credit card required • Start receiving matches in 48 hours
+              No commitment required • See how Bridge works in minutes
             </p>
           </div>
         </motion.div>

@@ -4,11 +4,9 @@ import Home from "./Home";
 
 import Employers from "./Employers";
 
-import StudentDashboard from "./StudentDashboard";
+import Contact from "./Contact";
 
-import Onboarding from "./Onboarding";
-
-import OnboardingParse from "./OnboardingParse";
+import AIVisual from "./AIVisual";
 
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 
@@ -18,11 +16,9 @@ const PAGES = {
     
     Employers: Employers,
     
-    StudentDashboard: StudentDashboard,
+    Contact: Contact,
     
-    Onboarding: Onboarding,
-    
-    OnboardingParse: OnboardingParse,
+    AIVisual: AIVisual,
     
 }
 
@@ -55,11 +51,9 @@ function PagesContent() {
                 
                 <Route path="/Employers" element={<Employers />} />
                 
-                <Route path="/StudentDashboard" element={<StudentDashboard />} />
+                <Route path="/Contact" element={<Contact />} />
                 
-                <Route path="/Onboarding" element={<Onboarding />} />
-                
-                <Route path="/OnboardingParse" element={<OnboardingParse />} />
+                <Route path="/AIVisual" element={<AIVisual />} />
                 
             </Routes>
         </Layout>

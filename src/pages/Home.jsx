@@ -3,13 +3,13 @@ import Header from "../components/navigation/Header";
 import Hero from "../components/landing/Hero";
 import HowItWorks from "../components/landing/HowItWorks";
 import BeyondResumes from "../components/landing/BeyondResumes";
-import DashboardMockup from "../components/landing/DashboardMockup";
+import DashboardShowcase from "../components/landing/DashboardShowcase";
 import Testimonials from "../components/landing/Testimonials";
+import StudentFinalCTA from "../components/landing/StudentFinalCTA";
 import Footer from "../components/landing/Footer";
 
 export default function Home() {
   useEffect(() => {
-    // Smooth scroll for anchor links
     const handleScroll = (e) => {
       if (e.target.tagName === 'A' && e.target.hash) {
         e.preventDefault();
@@ -29,8 +29,8 @@ export default function Home() {
       <Hero />
       <HowItWorks />
       <BeyondResumes />
-      <DashboardMockup />
-      <Testimonials />
+      <DashboardShowcase />
+      <StudentFinalCTA />
       <Footer />
     </div>
   );

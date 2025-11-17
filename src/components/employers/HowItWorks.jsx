@@ -3,25 +3,25 @@ import { motion } from "framer-motion";
 import { FileText, Brain, Calendar } from "lucide-react";
 
 const steps = [
-  {
-    number: "01",
-    icon: FileText,
-    title: "Describe your role",
-    description: "Enter a short prompt or upload a brief"
-  },
-  {
-    number: "02",
-    icon: Brain,
-    title: "AI matches candidates",
-    description: "Uses student projects, skills, and experiences to find real fit"
-  },
-  {
-    number: "03",
-    icon: Calendar,
-    title: "Review & interview",
-    description: "Request mini-projects, assessments, or schedule interviews instantly"
-  }
-];
+{
+  number: "01",
+  icon: FileText,
+  title: "Describe your role",
+  description: "Upload a brief or write a prompt. Bridge extracts the required skills and auto-generates a tailored mini-assessment."
+},
+{
+  number: "02",
+  icon: Brain,
+  title: "Candidate matching",
+  description: "We source students on and off Bridge. Each candidate is scored using your custom assessment — only strong fits move forward."
+},
+{
+  number: "03",
+  icon: Calendar,
+  title: "Review & interview",
+  description: "AI that reads code, projects, GitHub, coursework — not just keywords on a resume."
+}];
+
 
 export default function EmployerHowItWorks() {
   return (
@@ -32,8 +32,8 @@ export default function EmployerHowItWorks() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-20"
-        >
+          className="text-center mb-20">
+
           <div className="inline-block px-4 py-2 rounded-full font-normal text-sm mb-6 bg-gray-100 border border-gray-300 text-[#1E3A8A]">
             How it works
           </div>
@@ -41,24 +41,24 @@ export default function EmployerHowItWorks() {
             <span className="text-[#0B1121]">Three steps to</span>{" "}
             <span className="text-[#1E3A8A]">hiring great talent</span>
           </h2>
-          <p className="text-xl text-[#6B7280] max-w-2xl mx-auto leading-relaxed font-normal">
-            Stop sorting résumés. Our AI builds 3D skill profiles from real projects and experience — and matches you only with candidates who fit.
+          <p className="text-xl text-[#6B7280] max-w-2xl mx-auto leading-relaxed font-normal">Stop sorting résumés. Bridge sources talent from our platform and across the web, generates a custom assessment from your role, and sends you candidates who’ve proven they can do the work.
+
           </p>
         </motion.div>
 
         <div className="grid md:grid-cols-3 gap-12 lg:gap-16">
-          {steps.map((step, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.2 }}
-              className="relative h-full"
-            >
-              {i < steps.length - 1 && (
-                <div className="hidden md:block absolute top-20 left-full w-full h-0.5 -translate-x-1/2 bg-gray-300" />
-              )}
+          {steps.map((step, i) =>
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: i * 0.2 }}
+            className="relative h-full">
+
+              {i < steps.length - 1 &&
+            <div className="hidden md:block absolute top-20 left-full w-full h-0.5 -translate-x-1/2 bg-gray-300" />
+            }
 
               <div className="relative bg-white rounded-3xl p-8 shadow-lg border border-gray-200 hover:shadow-2xl transition-all duration-300 group h-full flex flex-col">
                 <div className="absolute -top-4 -left-4 w-12 h-12 bg-[#1E3A8A] rounded-2xl flex items-center justify-center text-white font-medium shadow-lg">
@@ -77,9 +77,9 @@ export default function EmployerHowItWorks() {
                 </p>
               </div>
             </motion.div>
-          ))}
+          )}
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 }

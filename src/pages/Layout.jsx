@@ -1,7 +1,16 @@
 
-import React from "react";
+import React, { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import ErrorBoundary from "./components/ErrorBoundary";
+import { Toaster } from "@/components/ui/toaster";
 
 export default function Layout({ children }) {
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
   return (
     <>
       <style jsx global>{`
@@ -53,7 +62,10 @@ export default function Layout({ children }) {
           border-color: #FFFF00;
         }
       `}</style>
-      {children}
+      <ErrorBoundary>
+        {children}
+      </ErrorBoundary>
+      <Toaster />
     </>
   );
 }

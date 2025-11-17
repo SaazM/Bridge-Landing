@@ -1,18 +1,11 @@
-
-import React, { useState } from "react";
+import React from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function Hero() {
-  const [email, setEmail] = useState("");
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setIsSubmitted(true);
-    setTimeout(() => setIsSubmitted(false), 3000);
+  const handleJoinWaitlist = () => {
+    window.open('https://tally.so/r/kddZMR', '_blank');
   };
 
   return (
@@ -25,58 +18,31 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="space-y-8"
-        >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-gray-300 bg-gray-100">
-            <Sparkles className="w-4 h-4 text-[#1E3A8A]" />
-            <span className="text-sm font-normal text-[#1E3A8A]">
-              Beta launching at UCSD
-            </span>
-          </div>
+          className="space-y-8">
 
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-semibold leading-tight tracking-tight">
-            <span className="text-[#0B1121]">Weekly interviews.</span>{" "}
-            <span className="text-[#1E3A8A]"><br/>No applications.</span>
+            <span className="text-[#0B1121]">You don't apply.</span>{" "}
+            <span className="text-[#1E3A8A]"><br />You get matched.</span>
           </h1>
 
+          <p className="text-xl lg:text-2xl text-[#6B7280] leading-relaxed max-w-3xl mx-auto font-normal">We automatically match you with top startup internships. 
+<br />No job boards. No applications. No forms.
 
-          <p className="text-xl lg:text-2xl text-[#6B7280] leading-relaxed max-w-3xl mx-auto font-normal">
-            We match your skills and experience with startups for direct internship interviews — no waiting, no applications.
           </p>
 
-          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4 max-w-2xl mx-auto">
-            <Input
-              type="email"
-              placeholder="Enter your .edu email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="h-16 px-6 text-lg rounded-2xl border-2 border-gray-200 focus:border-[#FFFF00] transition-all"
-              required
-            />
+          <div className="flex justify-center">
             <Button
-              type="submit"
+              onClick={handleJoinWaitlist}
               className="h-16 px-10 text-lg font-medium rounded-2xl text-[#1E3A8A] shadow-lg hover:shadow-xl transition-all whitespace-nowrap"
               style={{ backgroundColor: '#FFFF00' }}
               onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#FFFF00'}
-              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#FFFF00'}
-            >
-              {isSubmitted ? (
-                "Added! 🎉"
-              ) : (
-                <>
-                  Join Waitlist <ArrowRight className="ml-2 w-5 h-5" />
-                </>
-              )}
+              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#FFFF00'}>
+              Join Waitlist <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
-          </form>
-
-          <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-[#6B7280]">
-            <div className="flex items-center gap-2">
-              <span>347+ students signed up</span>
-            </div>
           </div>
+
         </motion.div>
       </div>
-    </div>
-  );
+    </div>);
+
 }

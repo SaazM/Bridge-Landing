@@ -6,15 +6,15 @@ export function useMilestones(isSkipped = false) {
   const [isComplete, setIsComplete] = useState(false);
 
   const milestones = [
-    { id: 0, text: "Extracting education and experience…", progress: 30, duration: 3000 },
-    { id: 1, text: "Identifying skills and projects…", progress: 60, duration: 4000 },
-    { id: 2, text: "Mapping your profile in 3D space…", progress: 90, duration: 3000 },
-    { id: 3, text: "Profile ready!", progress: 100, duration: 1000 }
+    { id: 0, text: "Extracting education and experience…", progress: 10, duration: 3000 },
+    { id: 1, text: "Identifying skills and projects…", progress: 20, duration: 4000 },
+    { id: 2, text: "Mapping your profile in 3D space…", progress: 30, duration: 3000, subtext: "found 2 matches" },
+    { id: 3, text: "Profile is 30% complete", progress: 30, duration: 1000 }
   ];
 
   useEffect(() => {
     if (isSkipped) {
-      setProgress(100);
+      setProgress(30);
       setCurrentMilestone(3);
       setIsComplete(true);
       return;
